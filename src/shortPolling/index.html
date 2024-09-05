@@ -9,7 +9,23 @@
         <h1>Short Polling</h1>
         <div id="container"></div>
         <script>
-        
+            async function getData() {
+                try {
+                    const res = await fetch('./getData')
+                    const result = await res.json()
+                    document.getElementById('container').innerHTML = result.data;
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            let interval 
+            interval = setInterval(()=>{
+                getData();
+            }, 5000);
+
+            getData();
+            // clearInterval() // don't forgot in case nevigate, event occur
+
         </script>
     </body>
 </html>

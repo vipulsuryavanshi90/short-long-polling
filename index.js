@@ -1,9 +1,17 @@
-import express from 'express';
+const express = require('express');
 
 const app = new express();
 
 const PORT  = process.env.PORT || 5001;
 let sampleData = 'Initial data recieved';
+
+app.get('/shortPolling', (req, res) => {
+    res.sendFile(__dirname + '/src/shortPolling/index.html');
+});
+
+app.get('/longPolling', (req, res) => {
+    res.sendFile(__dirname + '/src/longPolling/index.html');
+});
 
 app.get('/getData', (req, res) => {
     res.send({
