@@ -3,13 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Long Polling</title>
+        <title>Short Polling</title>
     </head>
     <body>
-        <h1>Long Polling</h1>
+        <h1>Short Polling</h1>
         <div id="container"></div>
         <script>
-        
+            async function getData(lastData) {
+                try {
+                    const res = await fetch(`./getLongPollingData?lastData=${lastData}`)
+                    const result = await res.json()
+                    document.getElementById('container').innerHTML = result.data;
+                    getData(result.data);
+                } catch (error) {
+                    console.log(error) // erro should be handle
+                }
+            }
+            getData(null);
+
         </script>
     </body>
 </html>
